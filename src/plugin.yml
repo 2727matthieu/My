@@ -1,0 +1,8 @@
+name: My
+main: com.dootie.my.My
+version: 1.11.1
+author: Dootie_
+description: Customize a lot of things!
+commands:
+    my:
+        description: Main command for My

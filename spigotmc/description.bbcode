@@ -1,0 +1,278 @@
+[IMG]https://i.gyazo.com/1b9376f7268369b0b95d0a56a31ef8fc.png[/IMG]
+[URL='https://www.spigotmc.org/wiki/my/']Wiki[/URL]
+
+[CENTER][QUOTE]Feedback on Minecraft 1.13 is appreciated, did everything work as expected?[/QUOTE]
+[/CENTER]
+
+[CENTER][IMG]https://i.gyazo.com/eea7d532cfb4b67a3f535c84f3440fcc.png[/IMG]
+About
+[/CENTER]
+My is a plugin that improves the survival and minigames (such as UHC) experience for your players.
+This plugin is able to create your own custom commands, crafting, furnace and brewing recipes, remove vanilla recipes, create custom food, tools and weapons with additional effects such as an item that is able to destroy bedrock, an item that automatically melt ores when you destroy them, giftchests (something like the lootbags mod) and more, check the features below!
+[CENTER][SPOILER="Some screenshots of the plugin"]
+[SIZE=5]Tools with custom effects
+[IMG]https://i.gyazo.com/45a52fd0363c7717731eb401792487c4.png[/IMG] [IMG]https://i.gyazo.com/a8d23e1fa34fd5362a43b39e41c9f45c.png[/IMG] 
+[IMG]https://i.gyazo.com/89c1ae108f9f025c4f72239ed640f3ca.png[/IMG] [IMG]https://i.gyazo.com/82ebf49bb56f284726a4355cba7fe52f.png[/IMG] 
+
+Uncrafter[/SIZE]
+[IMG]https://i.gyazo.com/36b1f2969be411a804365a7712761304.png[/IMG] [IMG]https://i.gyazo.com/e9c0281c4c72d69b7e21c58dba7de2b2.png[/IMG]
+[/SPOILER]
+[/CENTER]
+
+[CENTER][IMG]https://i.gyazo.com/69f2d6ab72ed655b23310e23cfe64df4.png[/IMG]
+Features[/CENTER]
+
+Custom commands
+[LIST]
+[*]Create custom commands.
+[*]Set the arguments length.
+[*]Set the command usage.
+[*]Set the command description.
+[*]Set permissions to use the command.
+[*]Set aliases to the command.
+[*]API to create commands.
+[/LIST]
+Custom recipes
+[LIST]
+[*]Create crafting recipes.
+[*]Create furnace recipes.
+[*]Create brewing recipes.
+[*]Remove vanilla recipes.
+[*]Edit the amount of the output.
+[*]Edit the damage of the output.
+[*]Put enchants to the output.
+[*]Edit the name of the output.
+[*]Edit the lore of the output.
+[*]Put permissions to craft an item.
+[*]Multicraft (Only crafting recipes)
+[*]Dye leather armor.
+[*]Experience reward when you complete a furnace recipe.
+[*]Supports NBT Tags.
+[*]API to create custom recipes.
+[/LIST]
+Giftchests
+[LIST]
+[*]Create giftchest with custom recipes.
+[*]Create custom reward items.
+[*]Edit the amount of the reward item.
+[*]Edit the damage of the reward item.
+[*]Put enchants to the reward item.
+[*]Edit the name of the reward item.
+[*]Edit the lore of the reward item.
+[*]NBT support.
+[*]Dye armor support.
+[*]Skull support.
+[*]Configurable particles.
+[*]Configurable sound.
+[/LIST]
+Uncrafter
+[LIST]
+[*]Uncraft vanilla recipes.
+[*]Uncraft custom recipes.
+[*]A custom permission to use it.
+[*]Enable/disable uncrafter
+[/LIST]
+ItemEffects
+[LIST]
+[*]Edit the fill of the food.
+[*]Edit the saturation of the food.
+[*]Add potion effects to the food.
+[*]Put AutoSmelt effect to the tools.
+[*]Put Experience drop effect to the tools.
+[*]Put Break bedrock effect to the tools.
+[*]Put potion effects to weapons.
+[/LIST]
+
+[CENTER][IMG]https://i.gyazo.com/518bf1d52597e2eca94caff643dcb691.png[/IMG][/CENTER]
+
+[LIST]
+[*]/my
+[/LIST]
+[CENTER][IMG]https://i.gyazo.com/b057006df052b75d01af43d6d9d8c49e.png[/IMG][/CENTER]
+
+[LIST]
+[*]my.admin Access to admin commands.
+[/LIST]
+
+[CENTER][IMG]https://i.gyazo.com/77d1048e1886697ef8e937ae4e095371.png[/IMG]
+Download and installation[/CENTER]
+[LIST=1]
+[*]Download the plugin, and put into the plugins folder.
+[*]Start and stop the server.
+[*]Configure the plugin.
+[*]Start the server.
+[*]Enjoy your new custom stuff :p.
+[/LIST]
+[CENTER][IMG]https://i.gyazo.com/13a2b5afc63178b86aa2633691f2f274.png[/IMG]
+
+» [URL='https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html'][B]Material list[/B][/URL] «
+» [URL='https://hub.spigotmc.org/javadocs/spigot/org/bukkit/enchantments/Enchantment.html'][B]Enchants list[/B][/URL] «
+» [B][URL='https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/potion/PotionEffectType.html']Potion effects list[/URL] [/B]«
+[/CENTER]
+[SIZE=6][SIZE=5]Create a custom command[/SIZE][/SIZE]
+[SIZE=4]For server administrators
+[CODE="yaml"]#Here go the label of the command (/command)
+<command>:
+  #Amount of arguments that the command need (-1 is infinite amount)
+  arguments: <number>
+  # Description of the command
+  description: <description>
+  # Message that is sended to the user in case of wrong usage
+  usage: <usage>
+  # Permission to execute the command
+  permission: <permission>
+  # Alternative labels for the command
+  aliases:
+  - <aliase 1>
+  - <aliase 2>
+  [...]
+  # Commands that will be executed when you use the command.
+  # Use "server:<command>" for server-side commands
+  # The placeholders for arguments are "{x}" where x is the argument number starting from 0 ("{-1}" is for put all arguments). For the argument 0 the placeholder is {0}, for the argument 1 the placeholder is {1}, etc...
+  # "{sender.name}" is the placeholder of the player executing the command
+  commands:
+  - <command 1>
+  - <command 2>[/CODE]
+For developers[/SIZE]
+[CODE=java]AbstractCommand test = new AbstractCommand(String label,
+        String description,
+        String usage,
+        String permission,
+        List<String> aliases){
+    @Override
+    public void run(CommandSender sender, String alias, String[] args) {
+        // Execute the command.
+    }
+
+    @Override
+    public void noPermission(CommandSender sender) {
+        // What need to do if sender doesn't have permission
+    }
+};
+test.register(Bukkit.getServer());[/CODE]
+
+[SIZE=5]
+Create a basic recipe[/SIZE]
+[code="YAML"]RECIPE-NAME:
+ # Recipe type
+  type: 'craft/furnace'
+  # This is only for crafting
+  shaped: true/false
+  # Permission node to craft the item.
+  permission: 'PERMISSION_NODE'
+  # Positions for the items in crafting
+  slot:
+    1:
+      material: 'MATERIAL'
+      damage: number
+  # This is the input, only for furnace
+  input:
+    material: 'MATERIAL'
+    damage: number
+  # Experience when you complete the recipe (Only for furnace)
+  experience: number
+  # This is the output, is for all types
+  output:
+    material: 'MATERIAL'
+    # Amount of the output item
+    amount: number
+    # Damage of the item, works too like data
+    damage: number
+    # Name of the item
+    name: '&6Name'
+    # Lore of the item
+    lore:
+    - Line 1
+    - Line 2
+    # Enchants of the item <Enchant name>:<level>
+    enchantments:
+   - DAMAGE_ALL:2[/code]
+[SIZE=5]
+More requeriments in the slot[/SIZE]
+[code="YAML"]RECIPE-NAME:
+ [...]
+  slot:
+    1:
+      material: 'MATERIAL'
+      damage: number
+      name: 'Item name'
+      lore:
+      - 'bla, bla, bla'
+  [...][/code]
+[SIZE=5]
+Put in a slot the output of another recipe[/SIZE]
+[code="YAML"]RECIPE-NAME:
+ [...]
+  slot:
+    1:
+      fromOutputRecipe: 'RECIPE-NAME'
+  [...][/code]
+
+[SIZE=5]Remove vanilla recipes[/SIZE]
+[code="YAML"]remove-vanilla:
+# Usage <material> or <material>:<data>
+- 'MATERIAL:DATA'[/code]
+
+[SIZE=5]Create a brewing recipe[/SIZE]
+For server administrators
+[code="YAML"]#Reminder that you can apply other parameters like amount, enchants, etc...
+DiamondStone:
+  type: brew
+  #Upper slot of the brewing inventory
+  material:
+    material: DIAMOND
+  #Item to transform
+  input:
+    material: STONE
+  #Result of the brew
+  output:
+    material: DIAMOND_BLOCK
+    amount: 1
+    name: '&rDiamond stone'[/code]
+For developers
+[code=Java]MyRecipe recipe = new MyRecipe(RecipeType.BREW);
+recipe.setMaterial(new MyItemStack(new ItemStack(Material.DIAMOND)));
+recipe.setInput(new MyItemStack(new ItemStack(Material.STONE)));
+MyItemStack mis = new MyItemStack(new ItemStack(Material.DIAMOND_BLOCK));
+mis.setDisplayName("Diamond stone");
+recipe.setMaterial(mis);
+recipe.register();[/code]
+[CENTER][IMG]https://i.gyazo.com/4b1f8e4c485af96145a42cc730ada2d9.png[/IMG][/CENTER]
+
+[SIZE=5]Create tools with special effects[/SIZE]
+[code="YAML"]#There are 3 effects: breakbedrock, autosmelt and xpdrop
+#breakbedrock: destroy bedrock
+#autosmelt: When you destroy iron or gold ores you get the iron/gold ingot.
+#xpdrop: when you destroy block you get xp, you need an aditional parameter inside the tool configuration called amount. Ex:
+#      tool:
+#        effect: xpdrop
+#        amount: 4
+
+BedrockDestroyer:
+  type: craft
+  shaped: true
+  permission: my.bedrockdestroyer
+  slot:
+    '1':
+      material: OBSIDIAN
+    '2':
+      material: OBSIDIAN
+    '3':
+      material: OBSIDIAN
+    '5':
+      material: STICK
+    '8':
+      material: STICK
+  output:
+    material: GOLD_PICKAXE
+    amount: 1
+    name: '&6The Pickaxe'
+    lore:
+    - '&rThis pickaxe can destroy bedrock. Yes.'
+    data:
+      tool:
+        effect: breakbedrock[/code]
+
+
+[SIZE=7][COLOR=#ff9999][B]WARNING[/B][/COLOR][/SIZE]
+[QUOTE]I didn't put examples of everything this plugin can do so if you need more examples PM me and I'll add them.[/QUOTE]

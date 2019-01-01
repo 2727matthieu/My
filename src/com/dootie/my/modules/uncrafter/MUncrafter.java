@@ -26,8 +26,6 @@ public class MUncrafter extends Module {
     }
     
     private void generateConfig() throws IOException{
-        if(!FileManager.CONFIG_YAML.contains("modules.uncrafter.enabled"))
-            FileManager.CONFIG_YAML.set("modules.uncrafter.enabled", true);
         if(!FileManager.CONFIG_YAML.contains("modules.uncrafter.permission"))
             FileManager.CONFIG_YAML.set("modules.uncrafter.permission", "my.uncraft");
         FileManager.CONFIG_YAML.save(FileManager.CONFIG_FILE);

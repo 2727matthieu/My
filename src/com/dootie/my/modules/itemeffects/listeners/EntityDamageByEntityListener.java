@@ -1,8 +1,7 @@
 package com.dootie.my.modules.itemeffects.listeners;
 
 
-import com.dootie.my.helpers.item.MyItemStack;
-import com.dootie.my.helpers.ItemStackUtils;
+import com.dootie.my.modules.items.MItemStack;
 import java.util.List;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
@@ -22,17 +21,18 @@ public class EntityDamageByEntityListener implements Listener {
             ItemStack weapon = damager.getEquipment().getItemInMainHand();
             
             if (weapon == null) return;
-            for(MyItemStack output : MyItemStack.getMyItemStacks()){
-                if(!ItemStackUtils.compare(weapon, output, true)) continue;
-                this.addPotionEffect(output, damaged);
-            }
+        
+            MItemStack mis = new MItemStack(weapon);
+            if(mis.data.get("weapon.potionEffects") == null) return;
+
+            this.addPotionEffect(mis, damaged);
+            
         }catch(ClassCastException ex){
             
         }
     }
     
-    public void addPotionEffect(MyItemStack mis, LivingEntity damaged){
-        if(mis.data.get("weapon.potionEffects") == null) return;
+    public void addPotionEffect(MItemStack mis, LivingEntity damaged){
         for (String str : (List<String>) mis.data.get("weapon.potionEffects")) {
             String[] effect = str.split(":");
             if(effect.length == 3)

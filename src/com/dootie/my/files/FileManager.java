@@ -9,8 +9,11 @@ import org.bukkit.configuration.file.YamlConfiguration;
 public class FileManager {
     
     final private static File FOLDER = new File("plugins/my");
+    final public static File ITEMS_FOLDER = new File("plugins/my/item_packs");
     public static File CONFIG_FILE;
     public static YamlConfiguration CONFIG_YAML;
+    public static File DATA_FILE;
+    public static YamlConfiguration DATA_YAML;
     public static File RECIPES_FILE;
     public static YamlConfiguration RECIPES_YAML;
     public static File COMMANDS_FILE;
@@ -23,9 +26,14 @@ public class FileManager {
     static {
         try {
             FOLDER.mkdir();
+            ITEMS_FOLDER.mkdir();
             CONFIG_FILE = new File(FOLDER.getPath()+"/config.yml");
             if(!CONFIG_FILE.exists()) CONFIG_FILE.createNewFile();
             CONFIG_YAML = YamlConfiguration.loadConfiguration(CONFIG_FILE);
+            
+            DATA_FILE = new File(FOLDER.getPath()+"/data.yml");
+            if(!DATA_FILE.exists()) DATA_FILE.createNewFile();
+            DATA_YAML = YamlConfiguration.loadConfiguration(DATA_FILE);
             
             RECIPES_FILE = new File(FOLDER.getPath()+"/recipes.yml");
             if(!RECIPES_FILE.exists()) RECIPES_FILE.createNewFile();

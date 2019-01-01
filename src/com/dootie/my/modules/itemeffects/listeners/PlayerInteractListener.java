@@ -1,11 +1,7 @@
 package com.dootie.my.modules.itemeffects.listeners;
 
 
-import com.dootie.my.modules.recipes.v2.MRecipes;
-import com.dootie.my.helpers.item.MyItemStack;
-import com.dootie.my.modules.recipes.v2.api.MyRecipe;
-import com.dootie.my.helpers.ItemStackUtils;
-import java.util.List;
+import com.dootie.my.modules.items.MItemStack;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
@@ -25,15 +21,13 @@ public class PlayerInteractListener implements Listener {
         if (tool == null) return;
         
         if (e.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
-            for(MyItemStack mis : MyItemStack.getMyItemStacks()){
-                if(!ItemStackUtils.compare(mis, tool, true)) continue;
-                if(mis.data.get("tool.effect") == null) continue;
-                if(!mis.data.get("tool.effect").equals("breakbedrock")) continue;
-                if(block.getType() != Material.BEDROCK) continue;
-                block.setType(Material.AIR);
-                block.getLocation().getWorld().dropItem(block.getLocation(), new ItemStack(Material.BEDROCK));
-                tool.setDurability((short) (tool.getDurability() + 1));
-            }
+            MItemStack mis = new MItemStack(tool);
+            if(mis.data.get("tool.effect") == null) return;
+            if(!mis.data.get("tool.effect").equals("breakbedrock")) return;
+            if(block.getType() != Material.BEDROCK) return;
+            block.setType(Material.AIR);
+            block.getLocation().getWorld().dropItem(block.getLocation(), new ItemStack(Material.BEDROCK));
+            tool.setDurability((short) (tool.getDurability() + 1));
         }
     }
 }

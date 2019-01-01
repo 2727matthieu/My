@@ -1,15 +1,50 @@
 [IMG]https://i.gyazo.com/1b9376f7268369b0b95d0a56a31ef8fc.png[/IMG]
-[URL='https://www.spigotmc.org/wiki/my/']Wiki[/URL]
-
-[CENTER][QUOTE]Feedback on Minecraft 1.13 is appreciated, did everything work as expected?[/QUOTE]
+[CENTER][SIZE=7][QUOTE]I don't have enough time to create new features. I will just mantain it. Collaboration is appreciated via Github.[/QUOTE]
+Contact me via [URL='https://iridum.github.io/']Discord/Twitter...[/URL]
+[URL='https://github.com/Iridum/My']Source available[/URL][/SIZE]
 [/CENTER]
+[B][SIZE=5]You want to support me with a donation?[/SIZE][/B]
+[LEFT][SIZE=4]Send me a message to know how yo can do it![/SIZE][/LEFT]
+
+[SIZE=5][B]Known bugs[/B][/SIZE]
+[CENTER][LIST]
+[*][LEFT]Random crashes on server start. Don't worry, everything will work fine.[/LEFT]
+[/LIST][/CENTER]
 
 [CENTER][IMG]https://i.gyazo.com/eea7d532cfb4b67a3f535c84f3440fcc.png[/IMG]
-About
 [/CENTER]
-My is a plugin that improves the survival and minigames (such as UHC) experience for your players.
-This plugin is able to create your own custom commands, crafting, furnace and brewing recipes, remove vanilla recipes, create custom food, tools and weapons with additional effects such as an item that is able to destroy bedrock, an item that automatically melt ores when you destroy them, giftchests (something like the lootbags mod) and more, check the features below!
-[CENTER][SPOILER="Some screenshots of the plugin"]
+[B][SIZE=5]Hi, I'm a server owner/admin/mod, how can this plugin improve my server?[/SIZE][/B]
+My is a plugin that improves the survival and minigames with crafting (such as UHC, skywars...) experience for your players.
+
+This plugin is able to create your own custom blocks with textures, items, commands, crafting, furnace and brewing recipes.
+
+Ever wanted to combine custom recipes with fastcraft? This is your plugin, it comes with a FastCraft and uncrafter module that works with custom items.
+
+You can also remove vanilla recipes, create custom food, tools and weapons with additional effects such as an item that is able to destroy bedrock, an item that automatically melt ores when you destroy them, giftchests (something like the lootbags mod) and more, check the features below and read the [B]Tutorials[/B] to see some pictures and see how easy is!
+
+[B][SIZE=5]Hi, I code plugins for Spigot, what can offer this plugin to me?[/SIZE][/B]
+With this plugin you can create custom blocks and items with custom textures and handle multiple events to create awesome plugins.
+
+Also you can create custom brewing recipes and advanced recipes (Craft an item and then wih that item you can craft more shiny items). You can't do that easily with the Bukkit API. Also, you can extend this plugin functions thanks to the data storage. Read [B]Create an advanced item section [/B]for more information about this.
+
+Track custom items and blocks with just a few lines of code. Here I put a small example:
+[QUOTE]CARE: I didn't explained the API on the tutorials, but you can ask me via PM or on the discussion.
+Or if u like exploring, check the classes of the plugin and try them.[/QUOTE]
+[code=Java]// Convert an ItemStack into a special ItemStack
+MItemStack mis = new MItemStack(tool);
+
+// This return a custom ID if it is a custom item or null if it is not a custom item.
+String id = mis.getNBTTag("MY_ID");
+
+// You can check and get data from custom items.
+if(mis.data.get("tool.effect") == null) return;[/code]
+
+[B]
+To the person that is reading this:[/B]
+Be happy, like this custom block!
+[CENTER][IMG]https://i.gyazo.com/5d7b0448bc4ce62847662c6850343ffa.png[/IMG]
+
+[SPOILER="Some screenshots of the plugin that I didn't put in the tutorial"]
 [SIZE=5]Tools with custom effects
 [IMG]https://i.gyazo.com/45a52fd0363c7717731eb401792487c4.png[/IMG] [IMG]https://i.gyazo.com/a8d23e1fa34fd5362a43b39e41c9f45c.png[/IMG] 
 [IMG]https://i.gyazo.com/89c1ae108f9f025c4f72239ed640f3ca.png[/IMG] [IMG]https://i.gyazo.com/82ebf49bb56f284726a4355cba7fe52f.png[/IMG] 
@@ -21,6 +56,8 @@ Uncrafter[/SIZE]
 
 [CENTER][IMG]https://i.gyazo.com/69f2d6ab72ed655b23310e23cfe64df4.png[/IMG]
 Features[/CENTER]
+[B]Use the features that you want[/B]
+You don't need some features? Disable them on the configuration to not waste your resources.
 
 Custom commands
 [LIST]
@@ -32,12 +69,31 @@ Custom commands
 [*]Set aliases to the command.
 [*]API to create commands.
 [/LIST]
+Custom items and blocks
+[LIST]
+[*]Put custom textures to blocks. [B]Currently supports up to 10 blocks. (From ID 1 to 10)[/B]
+
+[*]Put custom textures to items. [B][B]Currently supports up to 10 items. [B](From ID 0 to 9)[/B][/B][/B]
+
+[*]Edit the damage.
+[*]Put enchants.
+[*]Edit the name.
+[*]Edit the lore.
+[*]Dye leather armor.
+[*]Put a skull owner (Only PLAYER_HEAD with damage 3).
+[*]Supports NBT Tags (items).
+[*]Custom data storage for plugin developers.
+[*]API to create custom items and blocks and handle them.
+[/LIST]
 Custom recipes
 [LIST]
 [*]Create crafting recipes.
 [*]Create furnace recipes.
 [*]Create brewing recipes.
 [*]Remove vanilla recipes.
+[*]Put custom items as input.
+[*]Put custom items as output.
+
 [*]Edit the amount of the output.
 [*]Edit the damage of the output.
 [*]Put enchants to the output.
@@ -50,6 +106,13 @@ Custom recipes
 [*]Supports NBT Tags.
 [*]API to create custom recipes.
 [/LIST]
+[B]Fastcraft[/B]
+Fastcraft is a module that allow your players to craft items without having to know the recipes, just click the crafting table and this GUI will be opened! The GUI comes with a button to open the clasic crafting table.
+The difference between this fastcraft and other plugins like this is that it supports custom recipes.
+Also, players need a permission to use it.
+
+[CENTER][IMG]https://i.gyazo.com/ce4f68a8139ddbcf257538a130bedc48.png[/IMG][/CENTER]
+
 Giftchests
 [LIST]
 [*]Create giftchest with custom recipes.
@@ -83,17 +146,20 @@ ItemEffects
 [*]Put potion effects to weapons.
 [/LIST]
 
+Planned to add
+[LIST]
+[*]Recipebook
+[/LIST]
+
 [CENTER][IMG]https://i.gyazo.com/518bf1d52597e2eca94caff643dcb691.png[/IMG][/CENTER]
 
 [LIST]
 [*]/my
 [/LIST]
 [CENTER][IMG]https://i.gyazo.com/b057006df052b75d01af43d6d9d8c49e.png[/IMG][/CENTER]
-
 [LIST]
-[*]my.admin Access to admin commands.
+[*][B]my.fastcraft.use [/B]Use the FastCraft
 [/LIST]
-
 [CENTER][IMG]https://i.gyazo.com/77d1048e1886697ef8e937ae4e095371.png[/IMG]
 Download and installation[/CENTER]
 [LIST=1]
@@ -104,14 +170,33 @@ Download and installation[/CENTER]
 [*]Enjoy your new custom stuff :p.
 [/LIST]
 [CENTER][IMG]https://i.gyazo.com/13a2b5afc63178b86aa2633691f2f274.png[/IMG]
+Tutorials: How to configure the plugin
 
 » [URL='https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html'][B]Material list[/B][/URL] «
 » [URL='https://hub.spigotmc.org/javadocs/spigot/org/bukkit/enchantments/Enchantment.html'][B]Enchants list[/B][/URL] «
 » [B][URL='https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/potion/PotionEffectType.html']Potion effects list[/URL] [/B]«
+
+[QUOTE]First time here? Start with one of the listed tutorials
+[B][B]Remove vanilla recipes[/B]
+Create a command
+Create an item[/B][/QUOTE]
 [/CENTER]
-[SIZE=6][SIZE=5]Create a custom command[/SIZE][/SIZE]
-[SIZE=4]For server administrators
-[CODE="yaml"]#Here go the label of the command (/command)
+[SIZE=5]Remove vanilla recipes[/SIZE]
+[SPOILER]To remove vanilla recipes go to a file named [B]recipes.yml [/B]and paste the following:
+
+[SIZE=4][code="YAML"]# List where you have to put what item you don't want to be created.
+# Usage: MATERIAL:damage
+[SIZE=4]remove-vanilla:
+- STONE_PICKAXE:0[/SIZE][/code]
+[/SIZE]
+Now, time to test it. Open your server and try to craft this item.
+[CENTER][IMG]https://i.gyazo.com/4c906cffde5a28b3f60db68f713026cc.png[/IMG][/CENTER]
+[/SPOILER]
+
+[SIZE=6][SIZE=5]Create a command[/SIZE][/SIZE]
+[SPOILER]
+[QUOTE]Not updated tutorial, but works.[/QUOTE]
+[SIZE=4][CODE="yaml"]#Here go the label of the command (/command)
 <command>:
   #Amount of arguments that the command need (-1 is infinite amount)
   arguments: <number>
@@ -132,9 +217,8 @@ Download and installation[/CENTER]
   # "{sender.name}" is the placeholder of the player executing the command
   commands:
   - <command 1>
-  - <command 2>[/CODE]
-For developers[/SIZE]
-[CODE=java]AbstractCommand test = new AbstractCommand(String label,
+  - <command 2>[/CODE][/SIZE][/SPOILER]
+[SPOILER="Java API"][CODE=java]AbstractCommand test = new AbstractCommand(String label,
         String description,
         String usage,
         String permission,
@@ -149,97 +233,443 @@ For developers[/SIZE]
         // What need to do if sender doesn't have permission
     }
 };
-test.register(Bukkit.getServer());[/CODE]
+test.register(Bukkit.getServer());[/CODE][/SPOILER]
 
-[SIZE=5]
-Create a basic recipe[/SIZE]
-[code="YAML"]RECIPE-NAME:
- # Recipe type
-  type: 'craft/furnace'
-  # This is only for crafting
-  shaped: true/false
-  # Permission node to craft the item.
-  permission: 'PERMISSION_NODE'
-  # Positions for the items in crafting
-  slot:
-    1:
-      material: 'MATERIAL'
-      damage: number
-  # This is the input, only for furnace
-  input:
-    material: 'MATERIAL'
-    damage: number
-  # Experience when you complete the recipe (Only for furnace)
-  experience: number
-  # This is the output, is for all types
-  output:
-    material: 'MATERIAL'
-    # Amount of the output item
-    amount: number
-    # Damage of the item, works too like data
-    damage: number
-    # Name of the item
-    name: '&6Name'
-    # Lore of the item
-    lore:
-    - Line 1
-    - Line 2
-    # Enchants of the item <Enchant name>:<level>
+[SIZE=5]Create an item[/SIZE]
+[SPOILER]Items are stored in a folder called [B]item_packs.[/B]
+Let's create a pack to store custom items first. Create a file named [B]myitems.yml [/B]inside that folder.
+
+Now we are going to create an item. Open the file and type the following:
+[code=YAML]# This is the item ID, make sure is unique.
+MyBigStone:
+    # The material of the item.
+    material: STONE
+    # The item is damaged? Not in this case!
+    damage: 0
+    # Look! A shiny stone!
+    #Usage: ENCHANT_ID:LEVEL
     enchantments:
-   - DAMAGE_ALL:2[/code]
-[SIZE=5]
-More requeriments in the slot[/SIZE]
-[code="YAML"]RECIPE-NAME:
- [...]
-  slot:
-    1:
-      material: 'MATERIAL'
-      damage: number
-      name: 'Item name'
-      lore:
-      - 'bla, bla, bla'
-  [...][/code]
-[SIZE=5]
-Put in a slot the output of another recipe[/SIZE]
-[code="YAML"]RECIPE-NAME:
- [...]
-  slot:
-    1:
-      fromOutputRecipe: 'RECIPE-NAME'
-  [...][/code]
+      - DAMAGE_ALL:2
+    # The name of the item (But is not a pickax-- SHHHHHHHH)
+    name: '&6The Pickaxe'
+    # The lore of the Pickax-- I mean, the stone!
+    lore:
+    - '&rThis pickaxe can destroy bedrock. Yes. (Nope)'[/code]
+Nice! Now we have an useless item that cannot be obtained. Let's create a recipe to solve this.
 
-[SIZE=5]Remove vanilla recipes[/SIZE]
-[code="YAML"]remove-vanilla:
-# Usage <material> or <material>:<data>
-- 'MATERIAL:DATA'[/code]
+You can choose between crafting, furnace or brewing recipe to continue the basic tutorial.
+[CENTER][QUOTE]Next chapter:
+[B][B]Create a brewing recipe[/B]
+Create a crafting recipe
+Create a furnace recipe
+Create an advanced item[/B][/QUOTE][/CENTER]
+[/SPOILER]
 
-[SIZE=5]Create a brewing recipe[/SIZE]
-For server administrators
-[code="YAML"]#Reminder that you can apply other parameters like amount, enchants, etc...
-DiamondStone:
-  type: brew
-  #Upper slot of the brewing inventory
-  material:
-    material: DIAMOND
-  #Item to transform
+[SIZE=5]Create a crafting recipe[/SIZE]
+[SPOILER]
+[CENTER][QUOTE]Previous chapter:
+[B]Create an item[/B][/QUOTE][/CENTER]
+To create a crafting recipe open a file called [B]recipes.yml[/B]
+Now paste this:
+[code=YAML]# ID of the recipe. Make sure is unique
+CRAFT_MyBigStone:
+  # The type of crafting
+  type: craft
+  #Is shaped or you can put the ingredients in random order?
+  shaped: true
+  # The permission to craft it
+  permission: my.stone
+  # What you have to put in every slot?
+  slot:
+    '1':
+      material: STONE
+    '2':
+      material: STONE
+    '3':
+      material: STONE
+    '4':
+      material: STONE
+    '5':
+      material: STONE
+    '6':
+      material: STONE
+    '7':
+      material: STONE
+    '8':
+      material: STONE
+    '9':
+      material: STONE
+  # The output!
+  output:
+    # Here goes the ID of the custom item.
+    custom: MyBigStone
+    # The amount huh
+    amount: 1[/code]
+
+Time to test! Run the server and craft this shiny item:
+[CENTER][IMG]https://i.gyazo.com/9c68c97643977e9ab66c3d4707cc4e9a.png[/IMG]
+
+[QUOTE]Next chapter:
+[B]Create an advanced crafting recipe[/B][/QUOTE][/CENTER]
+[/SPOILER]
+
+[SIZE=5]Create a furnace recipe[/SIZE]
+[SPOILER]
+[CENTER][QUOTE]Previous chapter:
+[B]Create an item[/B][/QUOTE][/CENTER]
+To create a furnace recipe open a file called [B]recipes.yml[/B]
+Now paste this:
+[code=YAML]# ID of the recipe. Make sure is unique
+FURNACE_MyBigStone:
+  # The type of crafting
+  type: furnace
+  # The permission to craft it
+  permission: my.stone
+  # The input!
   input:
     material: STONE
-  #Result of the brew
+  # Experience when you complete the recipe
+  experience: 10
+  # The output!
   output:
-    material: DIAMOND_BLOCK
-    amount: 1
-    name: '&rDiamond stone'[/code]
-For developers
-[code=Java]MyRecipe recipe = new MyRecipe(RecipeType.BREW);
-recipe.setMaterial(new MyItemStack(new ItemStack(Material.DIAMOND)));
-recipe.setInput(new MyItemStack(new ItemStack(Material.STONE)));
-MyItemStack mis = new MyItemStack(new ItemStack(Material.DIAMOND_BLOCK));
-mis.setDisplayName("Diamond stone");
-recipe.setMaterial(mis);
-recipe.register();[/code]
-[CENTER][IMG]https://i.gyazo.com/4b1f8e4c485af96145a42cc730ada2d9.png[/IMG][/CENTER]
+    # Here goes the ID of the custom item.
+    custom: MyBigStone
+    # The amount huh
+    amount: 1[/code]
 
-[SIZE=5]Create tools with special effects[/SIZE]
+Time to test! Run the server and craft this shiny item:
+[CENTER][IMG]https://i.gyazo.com/a264932aece463c01ca7b672053c9928.png[/IMG][/CENTER]
+[/SPOILER]
+
+[SIZE=5]Create a brewing recipe[/SIZE]
+[SPOILER]
+[CENTER][QUOTE]Previous chapter:
+[B]Create an item[/B][/QUOTE][/CENTER]
+To create a brewing recipe open a file called [B]recipes.yml[/B]
+Now paste this:
+[code=YAML]# ID of the recipe. Make sure is unique
+BREW_MyBigStone:
+  # Type of the crafting
+  type: brew
+  # Upper slot of the brewing inventory
+  material:
+    material: STONE
+  # Item to transform
+  input:
+    material: STONE
+  # Result of the brew
+  output:
+    # Here goes the ID of the custom item.
+    custom: MyBigStone
+    # The amount
+    amount: 1[/code]
+
+Time to test! Run the server and craft this shiny item:
+[CENTER][IMG]https://i.gyazo.com/769d870475d8b743ae44b2974c277387.png[/IMG][/CENTER]
+[/SPOILER]
+
+[SIZE=5]Create an advanced item[/SIZE]
+[SPOILER]
+[CENTER][QUOTE]Previous chapter:
+[B]Create an item[/B][/QUOTE][/CENTER]
+
+This plugin comes with a few extra tools to improve the players experience on your server. Let's see what you can do.
+
+Open your item pack and copy this:
+[code=YAML]#Make sure this ID is unique
+SpecialLeatherItem:
+    material: LEATHER_CHESTPLATE
+    damage: 0
+    enchantments:
+     - PROTECTION_PROJECTILE:10
+    - DURABILITY:2
+    name: '&6Amazing chestplate'
+    lore:
+    - '&rIs not that good anyway'
+    # You can dye leather items using RGB color codes.
+    # Every color has a number from 0 - 255.
+    dye:
+      red: 100
+      green: 100
+      blue: 100
+    # Skulls can have an owner to display his skin.
+    # This will not work if material is not PLAYR_HEAD and damage is 3
+    skull:
+      owner: You
+    # Here is the section to put NBT Tags
+    # Usage: Argument1,argument2,argument3,...
+    # DO NOT PUT SPACES
+    # Every argument has a type and value except null arguments
+    # Usage type:value (except null)
+    # null is used to create a new list.
+    # In this case, the first nbt is to make the item unbreakable
+    # The other is to add +20 damage to the item
+    nbt:
+    - Byte:1,String:Unbreakable
+    - String:generic.attackDamage,String:AttributeModifiers,null,String:AttributeName
+    - String:generic.attackDamage,String:AttributeModifiers,Integer:0,String:Name
+    - String:mainhand,String:AttributeModifiers,Integer:0,String:Slot
+    - Double:20,String:AttributeModifiers,Integer:0,String:Amount
+    - Integer:0,String:AttributeModifiers,Integer:0,String:Operation
+    - Long:894654,String:AttributeModifiers,Integer:0,String:UUIDLeast
+    - Long:2872,String:AttributeModifiers,Integer:0,String:UUIDMost
+    # This is the most important and flexible part of items. The extra data values, but you need plugins that support it or code one yourself.
+    # In this example we're going to stone the following information:
+    # specialeffect.name: EXPLODE
+    # specialeffect.radius: 5
+    # With a plugin you can get those data tags from the custom item to perform additional effects.
+    # Why I show you this? Well this plugin also uses this tag.
+    data:
+      specialeffect:
+        name: EXPLODE
+        radius: 5[/code]
+
+If you want to test this item, create a recipe for it. You should know how! If you don't, why are you reading this instead of the basics?
+
+Now you that you know the existence of the data tag, you can use it to create more special items. Such as giftchests, tools with effects and more!
+
+[CENTER][QUOTE]Next chapter:
+[B]Create a block with a custom texture
+[B]Create an item with a custom texture[/B]
+Create a gifchest
+Create tools with extra effects
+Create food with extra effects[/B][/QUOTE][/CENTER]
+[/SPOILER]
+
+[SIZE=5]Create a block with a custom texture[/SIZE]
+[SPOILER]
+[CENTER][QUOTE]Previous chapter:
+[B]Create an advanced item[/B][/QUOTE][/CENTER]
+
+Thanks [URL='https://www.youtube.com/user/LapisDemon'][B]LapisDemon[/B] [/URL]for this great idea!
+
+This plugin can create new blocks with custom textures without mods, just with a texture pack. How do you create one?
+
+Open your item pack and copy this:
+[code=YAML]# This is the item ID, make sure is unique.
+HappyFace:
+    # The material of the item, not the block!
+    material: REDSTONE_TORCH
+    amount: 1
+    name: '&cSummon happy face'
+    lore:
+    - '&rA weird item. When placed you put a happy face instead.'
+    # To create a custom block we need the extra data
+    data:
+      # You can combine it with a custom item texture!
+      custom:
+        # Block ID (Be careful, there's a limit!)
+        block: 1[/code]
+
+Remember to create a recipe for the item!
+
+After that we need to create the texture, this plugin comes with a texture pack, open it and go to this folder: [B]texturepack\assets\minecraft\textures\blocks\lapisdemon\bonus\mushroomblocks[/B]
+
+The block id is 1, so let's edit the texture 001. Is recommended to use 16x16 textures to avoid lag on your players.
+
+[CENTER][IMG]https://i.gyazo.com/4176b6650a2460461760dc03bd0f136d.png[/IMG][/CENTER]
+
+Now let's create a zip and upload it to dropbox.
+
+[CENTER][IMG]https://i.gyazo.com/8992a3d4f8b8afa6dc74909430b0c96a.png[/IMG][/CENTER]
+
+Put [B]assets[/B] and [B]pack[/B] inside the zip!!!
+
+After uploading the file to dropbox you will get an url like this:
+[code]https://www.dropbox.com/s/xxxxxxxxxxxx/pack.zip?dl=0[/code]
+[B]IMPORTANT:[/B] Change the last 0 to a 1.
+[code]https://www.dropbox.com/s/xxxxxxxxxxxx/pack.zip?dl=1[/code]
+
+Open the server config file and put your resource-pack link.
+
+Time to test:
+
+[CENTER][IMG]https://i.gyazo.com/b8889f7fd8f235aba0db0a978cbcd8a0.png[/IMG]
+[IMG]https://i.gyazo.com/5d7b0448bc4ce62847662c6850343ffa.png[/IMG]
+[/CENTER]
+[B]I updated the texture pack and the new textures that I put does not work![/B]
+Put at the end of the link &v=0 to update it.
+If you already have the &v=0 at the end, change it to &v=1, and the next time to &v=2, etc...
+
+[B]My player did not accept the texture pack![/B]
+Change Server Resource Pack to Enabled.
+[CENTER][B][IMG]https://i.gyazo.com/7a216baaa8f92f8c5bceeb71b1fa818a.png[/IMG] [/B][/CENTER]
+[/SPOILER]
+
+[SIZE=5]Create an item with a custom texture[/SIZE]
+[SPOILER]
+[CENTER][QUOTE]Previous chapter:
+[B]Create an advanced item[/B][/QUOTE][/CENTER]
+
+This plugin can create new items with custom textures without mods, just with a texture pack. How do you create one?
+
+Open your item pack and copy this:
+[code=YAML]#ID of the custom item
+badsword:
+    material: STONE
+    amount: 1
+    name: '&cA bad sword'
+    lore:
+    - '&rLooks bad, I know'
+    data:
+      # You can combine it with a custom block texture!
+      custom:
+        # ID number of the custom item, has to be unique (Be careful, there's a limit!)
+        item: 0[/code]
+
+Remember to create a recipe for the item!
+
+After that we need to create the texture, this plugin comes with a texture pack, open it and go to this folder: [B]texturepack\assets\minecraft\textures\item\custom[/B]
+
+The item ID number is 0, so we have to create an image named [B]0.png[/B]
+
+Now let's create a zip and upload it to dropbox.
+
+[CENTER][IMG]https://i.gyazo.com/8992a3d4f8b8afa6dc74909430b0c96a.png[/IMG][/CENTER]
+
+Put [B]assets[/B] and [B]pack[/B] inside the zip!!!
+
+After uploading the file to dropbox you will get an url like this:
+[code]https://www.dropbox.com/s/xxxxxxxxxxxx/pack.zip?dl=0[/code]
+[B]IMPORTANT:[/B] Change the last 0 to a 1.
+[code]https://www.dropbox.com/s/xxxxxxxxxxxx/pack.zip?dl=1[/code]
+
+Open the server config file and put your resource-pack link.
+
+Time to test it! It worked?
+[CENTER][/CENTER]
+[B]I updated the texture pack and the new textures that I put does not work![/B]
+Put at the end of the link &v=0 to update it.
+If you already have the &v=0 at the end, change it to &v=1, and the next time to &v=2, etc...
+
+[B]My player did not accept the texture pack![/B]
+Change Server Resource Pack to Enabled.
+[CENTER][B][IMG]https://i.gyazo.com/7a216baaa8f92f8c5bceeb71b1fa818a.png[/IMG][/B][/CENTER]
+[/SPOILER]
+
+[SIZE=5]Create an advanced crafting recipe[/SIZE]
+[SPOILER]
+[CENTER][QUOTE]Previous chapter:
+[B]Create a crafting recipe[/B][/QUOTE][/CENTER]
+
+Before creating a new recipe, you need to create an item. Open your item pack and type the following:
+[code=YAML]MyBiggerStone:
+    material: COBBLESTONE
+    damage: 0
+    enchantments:
+    - DAMAGE_ALL:4
+    name: '&6Shiny Stone'
+    lore:
+    - '&rThe best cobblestone ever made.'[/code]
+
+Now we can create a new recipe. To create a crafting recipe open a file called [B]recipes.yml[/B]
+
+Type the following:
+[code=YAML]CRAFT_MyBiggerStone:
+  type: craft
+  shaped: true
+  permission: my.stoneplus
+  slot:
+    '1':
+      material: COBBLESTONE
+    '2':
+      material: STONE
+      # You will need 2 stones in this slot to craft it
+      amount: 2
+    '3':
+      material: COBBLESTONE
+    '4':
+      material: STONE
+    '5':
+      # Yes, you can put a custom item here
+      custom: MyBigStone
+    '6':
+      material: STONE
+    '7':
+      material: STONE
+    '8':
+      material: COBBLESTONE
+    '9':
+      material: STONE
+  output:
+   # Here goes the ID of the custom item.
+    custom: MyBiggerStone
+    amount: 1[/code]
+
+Time to test! Run the server and craft this shiny item:
+
+[QUOTE][B]CARE![/B] You will need to put 2 stones in slot 2. I have to update this tutorial image.[/QUOTE]
+[CENTER][IMG]https://i.gyazo.com/d711fff227986efc44d3ad6299e6b641.png[/IMG][/CENTER]
+[/SPOILER]
+
+[SIZE=5]Create a gifchest[/SIZE]
+[SPOILER]
+[CENTER][QUOTE]Previous chapter:
+[B]Create an advanced item[/B][/QUOTE][/CENTER]
+
+To create a giftchest, first we need a custom item with some data attached. Copy and paste this item to your item pack.
+[code=YAML]# Item ID
+MegaChest:
+    # We're going to make a 'mini chest' using skull owner. We need a player_head for that
+    material: PLAYER_HEAD
+    amount: 1
+    # Damage 0 represents a skeleton head. 3 is a player head
+    damage: 3
+    skull:
+      # What skin we put on the skull?
+      owner: 'MHF_Chest'
+    name: '&rMega&6Chest'
+    data:
+      # ID of the giftchest that we're going to create
+      giftchest: 'MegaChest_loot'[/code]
+
+Now that we have the item, let's create a recipe. Wait, you already know how to do that!
+
+Next step: open your [B]giftchest.yml[/B] file and paste the following code:
+[QUOTE]CARE: If you have something written by default delete it! Older versions of this plugin generated some outdated examples.[/QUOTE]
+
+[code=YAML]# ID of the giftchest, make sure is unique.
+MegaChest_loot:
+  # When used, it will drop one of the items on this list.
+  items:
+    # ID of the drop, works the same way as custom items: you can put nbt, enchants, damage put a custom item with the tag custom: ID, etc... BUT YOU CAN'T PUT THE DATA TAG!
+    stone:
+      material: STONE
+      amount: 4
+      enchantments:
+      - DAMAGE_ALL:2
+    diamond:
+      material: DIAMOND
+      amount: 1
+      name: '&4Diamond'
+      enchantments:
+      - DAMAGE_ALL:4
+# Try it with a custom item if you want
+#    a_custom_item:
+#      custom: YOUR_ITEM_ID
+# Sound when used
+  sound: BLOCK_GRASS_BREAK
+# Particle when used
+  particle:
+    name: SMOKE
+    amount: 10[/code]
+
+Time to test! Craft this shiny item and use it:
+[CENTER][IMG]https://i.gyazo.com/f12d5d1ca4cfaaafbb810e27c596eae6.png[/IMG]
+[IMG]https://i.gyazo.com/7e71a2f319e8d24e9d7cd7e3060e627b.png[/IMG][/CENTER]
+[/SPOILER]
+[SIZE=4]
+[SIZE=5]Create tools with extra effects[/SIZE][/SIZE]
+[QUOTE]PM me if you need help with this.[/QUOTE]
+[SIZE=4]
+[SIZE=5]Create food with extra effects[/SIZE][/SIZE]
+[QUOTE]PM me if you need help with this.[/QUOTE]
+
+[QUOTE]Need extra help? Contact me![/QUOTE]
+
+[SIZE=7]WARNING! FROM HERE THIS POST IS OUTDATED! I'M REWRITING IT.[/SIZE]
+
+[SIZE=5]Create tools with extra effects[/SIZE]
 [code="YAML"]#There are 3 effects: breakbedrock, autosmelt and xpdrop
 #breakbedrock: destroy bedrock
 #autosmelt: When you destroy iron or gold ores you get the iron/gold ingot.
@@ -272,7 +702,3 @@ BedrockDestroyer:
     data:
       tool:
         effect: breakbedrock[/code]
-
-
-[SIZE=7][COLOR=#ff9999][B]WARNING[/B][/COLOR][/SIZE]
-[QUOTE]I didn't put examples of everything this plugin can do so if you need more examples PM me and I'll add them.[/QUOTE]

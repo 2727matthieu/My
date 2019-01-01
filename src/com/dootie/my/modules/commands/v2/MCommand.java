@@ -20,23 +20,7 @@ public class MCommand extends Module {
 
     @Override
     public void run() {
-        try {
-            this.generateExample(); 
-            this.registerCommands();
-        } catch (IOException ex) {
-            Logger.getLogger(MCommand.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    public void generateExample() throws IOException{
-        if(FileManager.COMMANDS_FILE.length() > 0) return;
-        FileManager.COMMANDS_YAML.set("sendinfo.arguments", -1);
-        FileManager.COMMANDS_YAML.set("sendinfo.description", "Send an informative message");
-        FileManager.COMMANDS_YAML.set("sendinfo.usage", "/sendinfo <message>");
-        FileManager.COMMANDS_YAML.set("sendinfo.permission", "my.sendinfo");
-        FileManager.COMMANDS_YAML.set("sendinfo.aliases", Arrays.asList("si"));
-        FileManager.COMMANDS_YAML.set("sendinfo.commands", Arrays.asList("say [§cInfo§r] {-1}", "server:tell {sender.name} You send information ;)"));
-        FileManager.COMMANDS_YAML.save(FileManager.COMMANDS_FILE);
+        this.registerCommands();
     }
     
     private void registerCommands(){

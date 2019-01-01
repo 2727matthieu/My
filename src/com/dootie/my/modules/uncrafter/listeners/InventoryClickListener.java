@@ -2,7 +2,6 @@ package com.dootie.my.modules.uncrafter.listeners;
 
 import com.dootie.my.My;
 import com.dootie.my.modules.uncrafter.MUncrafter;
-import com.dootie.my.helpers.ItemStackUtils;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -35,7 +34,7 @@ public class InventoryClickListener implements Listener  {
         if(item.getType() == Material.AIR) return;
         List<Recipe> recipes = Bukkit.getServer().getRecipesFor(item);
         for(Recipe r : recipes){
-            if(!ItemStackUtils.compare(item, r.getResult(), true)) continue;
+            if(!r.getResult().equals(item)) continue;
             try{
                 ShapedRecipe recipe = (ShapedRecipe) r;
                 Map<Character, ItemStack> ingredient = recipe.getIngredientMap();

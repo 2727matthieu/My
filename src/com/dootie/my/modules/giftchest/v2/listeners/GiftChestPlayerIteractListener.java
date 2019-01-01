@@ -1,8 +1,8 @@
 package com.dootie.my.modules.giftchest.v2.listeners;
 
 
-import com.dootie.my.helpers.ItemStackUtils;
 import com.dootie.my.modules.giftchest.v2.api.GiftChest;
+import com.dootie.my.modules.items.MItemStack;
 import java.util.Random;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -27,25 +27,26 @@ public class GiftChestPlayerIteractListener implements Listener {
         World world = b.getWorld();
         Location droploc = new Location(world, xdrop, ydrop, zdrop);
         ItemStack is = event.getPlayer().getItemInHand();
-        if (is.getType() != Material.SKULL_ITEM) return;
-        for(GiftChest gc : GiftChest.getGiftchests()){
-            if(ItemStackUtils.compare(is, gc.recipe.getOutput(), false)){
-                event.setCancelled(true);
-                if(is.getAmount() == 1)
-                    event.getPlayer().getInventory().setItemInMainHand(new ItemStack(Material.AIR));
-                else{
-                    is.setAmount(is.getAmount()-1);
-                    event.getPlayer().getInventory().setItemInMainHand(is);
-                }
-                    
-                Random random = new Random();
-                ItemStack drop = gc.getRewards().get(random.nextInt(gc.getRewards().size()));
-                world.playEffect(droploc, gc.particle, gc.particle_amount);
-                if(gc.sound != null)
-                    world.playSound(droploc, gc.sound, 3.0F, 0.5F);
-                world.dropItem(droploc, drop);
-                return;
-            }
+        if (is.getType() != Material.PLAYER_HEAD) return;
+        
+        MItemStack mis = new MItemStack(is);
+        if(mis.data.get("giftchest") == null) return;
+        
+        GiftChest gc = GiftChest.getGiftchest((String) mis.data.get("giftchest"));
+        
+        event.setCancelled(true);
+        if(is.getAmount() == 1)
+            event.getPlayer().getInventory().setItemInMainHand(new ItemStack(Material.AIR));
+        else{
+            is.setAmount(is.getAmount()-1);
+            event.getPlayer().getInventory().setItemInMainHand(is);
         }
+                    
+        Random random = new Random();
+        ItemStack drop = gc.getRewards().get(random.nextInt(gc.getRewards().size())).getItemStack();
+        world.playEffect(droploc, gc.particle, gc.particle_amount);
+        if(gc.sound != null)
+            world.playSound(droploc, gc.sound, 3.0F, 0.5F);
+        world.dropItem(droploc, drop);
     }
 }

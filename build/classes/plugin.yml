@@ -1,8 +1,10 @@
 name: My
 main: com.dootie.my.My
-version: 1.11
+version: 2.2.1
+api-version: 1.13
 author: Dootie_
 description: Customize a lot of things!
 commands:
     my:
         description: Main command for My
+

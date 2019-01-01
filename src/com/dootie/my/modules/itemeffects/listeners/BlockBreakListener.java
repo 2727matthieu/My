@@ -1,11 +1,8 @@
 package com.dootie.my.modules.itemeffects.listeners;
 
 
-import com.dootie.my.helpers.item.MyItemStack;
-import com.dootie.my.helpers.ItemStackUtils;
+import com.dootie.my.modules.items.MItemStack;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -22,34 +19,33 @@ public class BlockBreakListener implements Listener{
         Player player = e.getPlayer();
         ItemStack tool = e.getPlayer().getInventory().getItemInMainHand();
         Block breakedBlock = e.getBlock();
-        HashMap<Material, Material> smelt = new HashMap<Material, Material>();
-        smelt.put(Material.COBBLESTONE, Material.STONE);
-        smelt.put(Material.GOLD_ORE, Material.GOLD_INGOT);
-        smelt.put(Material.IRON_ORE, Material.IRON_INGOT);
+        HashMap<Material, Material> melt = new HashMap<Material, Material>();
+        melt.put(Material.COBBLESTONE, Material.STONE);
+        melt.put(Material.STONE, Material.STONE);
+        melt.put(Material.GOLD_ORE, Material.GOLD_INGOT);
+        melt.put(Material.IRON_ORE, Material.IRON_INGOT);
         
         if (tool == null) return;
-        for(MyItemStack mis : MyItemStack.getMyItemStacks()){
-            if(!ItemStackUtils.compare(tool, mis, true)) continue;
-            if(!mis.data.containsKey("tool.effect")) continue;
-            String tool_effect = (String)mis.data.get("tool.effect");
-            if(tool_effect.equals("autosmelt")){
-                Iterator it2 = smelt.entrySet().iterator();
-                while (it2.hasNext()) {
-                    Map.Entry pair2 = (Map.Entry) it2.next();
-                    if (pair2.getKey() == breakedBlock.getType()) {
-                        player.getWorld().dropItem(breakedBlock.getLocation(), new ItemStack((Material)pair2.getValue()));
-                        e.setCancelled(true);
-                        breakedBlock.setType(Material.AIR);
-                        this.damageTool(player.getItemInHand());
-                        return;
-                    }
-                    it2.remove();
-                }
-            }else
-            if(tool_effect.equals("xpdrop")){
+        
+        MItemStack mis = new MItemStack(tool);
+        if(mis.data.get("tool.effect") == null) return;
+        
+        String tool_effect = (String)mis.data.get("tool.effect");
+        
+        switch(tool_effect){
+            case "xpdrop":
                 e.setExpToDrop(e.getExpToDrop() + Integer.parseInt((String) mis.data.get("tool.amount")));
-                return;
-            }
+                break;
+            case "automelt":
+                Material other = melt.get(breakedBlock.getType());
+                if(other == null) return;
+                e.setCancelled(true);
+                player.getWorld().dropItem(breakedBlock.getLocation(), new ItemStack(other));
+                breakedBlock.setType(Material.AIR);
+                this.damageTool(player.getItemInHand());
+                break;
+            default:
+                
         }
     }
     

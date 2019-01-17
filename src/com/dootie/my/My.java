@@ -37,10 +37,11 @@ public class My extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         try {
-            My.devLog("core > Starting...");
-            
             My.plugin = this;
             My.logger = this.getLogger();
+            
+            My.devLog("core > Starting...");
+            
             this.generateConfig();
             
             My.devlog = FileManager.CONFIG_YAML.getBoolean("dev");
@@ -65,6 +66,9 @@ public class My extends JavaPlugin implements Listener {
                 My.logger.log(Level.SEVERE, "");
                 My.logger.log(Level.SEVERE, "Remember to read the page!");
                 My.logger.log(Level.SEVERE, "https://www.spigotmc.org/resources/5176/");
+                My.logger.log(Level.SEVERE, "");
+                My.logger.log(Level.SEVERE, "Disable this message changing the config file");
+                My.logger.log(Level.SEVERE, "From 'tutorial: true' to 'tutorial: false'");
                 My.logger.log(Level.SEVERE, "");
                 My.logger.log(Level.SEVERE, "------------------------------------------------");
             }

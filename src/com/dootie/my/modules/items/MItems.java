@@ -13,9 +13,13 @@ import java.util.logging.Level;
 import javax.annotation.Nullable;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
+import org.bukkit.attribute.AttributeModifier.Operation;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 
@@ -94,6 +98,25 @@ public class MItems extends Module {
         }
         MItemStack mis = new MItemStack(new ItemStack(material));
         
+        /* Data */
+        if(config.getConfigurationSection(path+".data") != null)
+            for (String item_data : config.getConfigurationSection(path+".data").getKeys(true)) {
+                Object object = config.getConfigurationSection(path+".data").get(item_data);
+                mis.data.put(item_data, object);
+                My.devLog("Getting item : data > "+item_data+": "+object);
+            }
+        
+        /* Custom items */
+        if(mis.data.containsKey("custom.item")){
+            mis.getItemStack().setType(Material.DIAMOND_HOE);
+            mis.setNBTTag(new Object[]{((int) mis.data.get("custom.item")) + 1, "Damage"});
+            ItemMeta im = mis.getItemStack().getItemMeta();
+            im.setUnbreakable(true);
+            im.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, new AttributeModifier("generic.attackDamage", 0, Operation.ADD_SCALAR));
+            im.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, new AttributeModifier("generic.attackSpeed", 0, Operation.ADD_SCALAR));
+            mis.getItemStack().setItemMeta(im);
+        }
+        
         /* Amount */
         mis.getItemStack().setAmount(config.getInt(path+".amount"));
         if(mis.getItemStack().getAmount() == 0) mis.getItemStack().setAmount(1);
@@ -162,28 +185,6 @@ public class MItems extends Module {
         }
 
         My.devLog("Getting item > ItemStack ready {0}", mis.getItemStack());
-        
-        /* Data */
-        if(config.getConfigurationSection(path+".data") != null)
-            for (String item_data : config.getConfigurationSection(path+".data").getKeys(true)) {
-                Object object = config.getConfigurationSection(path+".data").get(item_data);
-                mis.data.put(item_data, object);
-                My.devLog("Getting item : data > "+item_data+": "+object);
-            }
-        
-        /* Custom items */
-        if(mis.data.containsKey("custom.item")){
-            mis.getItemStack().setType(Material.DIAMOND_HOE);
-            mis.setNBTTag(new Object[]{((int) mis.data.get("custom.item")) + 1, "Damage"});
-            mis.setNBTTag(new Object[]{(byte) 1, "Unbreakable"});
-            mis.setNBTTag(new Object[]{"generic.attackDamage", "AttributeModifiers", null, "AttributeName"});
-            mis.setNBTTag(new Object[]{"generic.attackDamage", "AttributeModifiers", 0, "Name"});
-            mis.setNBTTag(new Object[]{"mainhand", "AttributeModifiers", 0, "Slot"});
-            mis.setNBTTag(new Object[]{0d, "AttributeModifiers", 0, "Amount"});
-            mis.setNBTTag(new Object[]{0, "AttributeModifiers", 0, "Operation"});
-            mis.setNBTTag(new Object[]{1L, "AttributeModifiers", 0, "UUIDLeast"});
-            mis.setNBTTag(new Object[]{1L, "AttributeModifiers", 0, "UUIDMost"});
-        }
         
         My.devLog("Getting item : verify > {0}", mis.getItemStack());
         My.devLog("Getting item : return > {0}", mis);

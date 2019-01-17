@@ -1,6 +1,7 @@
 package com.dootie.my.modules.items;
 
 import com.dootie.my.My;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -24,7 +25,7 @@ public final class MItemStack {
         if(itemStack == null) return;
         String id = (String) this.getData("MY_ID");
         if(id != null){
-            this.data = MItems.items.get(id).data;
+            this.data.putAll(MItems.items.get(id).data);
             this.data.put("super", itemStack);
             My.devLog("MItemStack : create > Found ID {0}.", id);
         }else My.devLog("MItemStack : create > No ID found.");
@@ -92,7 +93,6 @@ public final class MItemStack {
     
     @Override
     public MItemStack clone(){
-        ItemStack clone = this.getItemStack().clone();
-        return new MItemStack(clone);
+        return new MItemStack(new ItemStack(this.getItemStack()));
     }
 }

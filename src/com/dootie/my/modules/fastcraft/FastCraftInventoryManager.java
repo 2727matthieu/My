@@ -11,6 +11,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 
 public class FastCraftInventoryManager {
@@ -36,7 +37,7 @@ public class FastCraftInventoryManager {
                 for(FastRecipe recipe : FastRecipe.getRecipes()){
                     if(count == maxcount) break;
                     if(!recipe.hasPermission(player)) continue;
-                    MItemStack mis = recipe.getResult().clone();
+                    ItemStack is = recipe.getResult().clone().getItemStack();
                     
                     boolean contains = false;
                     for(MItemStack material : recipe.getMaterials()){
@@ -48,7 +49,7 @@ public class FastCraftInventoryManager {
                     if(!contains) continue;
                     if(count++ < startcount) continue;
                     
-                    List<String> lore = mis.getLore();
+                    List<String> lore = is.getItemMeta().getLore();
                     if(lore == null) lore = new ArrayList<String>();
                     lore.add("");
                     lore.add("§r§lRequired:");
@@ -62,7 +63,10 @@ public class FastCraftInventoryManager {
                             lore.add("§r§c§l"+ material.getItemStack().getAmount() + " §r§c" + name );
                         }
                     }
-                    mis.setLore(lore);
+                    ItemMeta im = is.getItemMeta();
+                    im.setLore(lore);
+                    is.setItemMeta(im);
+                    MItemStack mis = new MItemStack(is);
                     mis.setData("craft", FastRecipe.getRecipes().indexOf(recipe));
                     inventory.addItem(mis.getItemStack());
                 }
